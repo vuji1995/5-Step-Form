@@ -1,24 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import Form from "./Components/form";
+import { ContextProvider } from "./Context/Context";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ContextProvider>
+      <div className="app w-screen h-screen bg-blue-100 flex flex-col justify-center items-center">
+        <Form />
+      </div>
+    </ContextProvider>
   );
 }
 
