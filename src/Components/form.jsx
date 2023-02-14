@@ -88,6 +88,8 @@ const Form = () => {
     setOnlineServicesSelected(e.currentTarget.getAttribute("data-value"));
   };
 
+  console.log(largerStorage, costumizableProfile, onlineServices);
+
   const addLargersStorage = (e) => {
     setLargerStorage(!largerStorage);
     setLargerStorageSelected(e.currentTarget.getAttribute("data-value"));
@@ -119,10 +121,10 @@ const Form = () => {
   }, [onlineServices, largerStorage, costumizableProfile, planPrice]);
 
   return (
-    <div className="container flex flex-col items-center lg:justify-center bg-sky-50 lg:flex-row lg:px-5 lg:py-5 lg:bg-stone-50 h-4/6 w-6/12 lg:rounded-2xl ">
+    <div className="container flex flex-col items-center w-10/12  lg:justify-center bg-sky-50 lg:flex-row lg:px-5 lg:py-5 lg:bg-stone-50 h-3/4  lg:rounded-2xl md:w-4/6 sm:w-5/6 2xl:justify-start xl:w-1/2">
       {/*LEFT PART*/}
       <div
-        className="left flex lg:flex-col w-full object-cover object-center lg:rounded-lg lg:w-2/6  lg:h-full bg-cover bg-center items-center justify-start lg:justify-around "
+        className="left flex lg:flex-col w-full object-cover object-center lg:rounded-lg lg:w-48  lg:h-full bg-cover bg-center items-center justify-start lg:justify-around xl:w-72"
         style={{ backgroundImage: `url(${ImageMobile})` }}
       >
         <div className="step flex items-center justify-center xl:justify-start w-3/4 mt-10 mb-20 lg:mt-0 lg:mb-0">
@@ -235,7 +237,7 @@ const Form = () => {
       {/*  WINDOW 1*/}
       {stepNumber === 1 && (
         <>
-          <div className="right flex flex-col px-4 py-5 bg-white  -mt-14 lg:mt-0 w-11/12 lg:w-2/3 lg:h-full lg:ml-8 lg:rounded-lg lg:p-7 xl:h-full rounded-md 2xl:mt-0 2xl:h-full">
+          <div className="right flex flex-col px-4 py-5 bg-white  -mt-14 lg:mt-0 w-11/12 lg:w-2/3 lg:h-full lg:ml-8 lg:rounded-lg lg:p-7 xl:h-full xl:w-full rounded-md 2xl:mt-0 2xl:h-full 2xl:w-full">
             <h2 className=" text-blue-900  text-xl lg:text-4xl font-bold ">
               Personal Info
             </h2>
@@ -294,7 +296,7 @@ const Form = () => {
                 </label>
                 {phoneError ? (
                   <p className="text-red-600 text-sm  lg:font-700">
-                    Phone number is not valid!
+                    Enter 10 or 9 digits, Croatian mobile phone number!
                   </p>
                 ) : (
                   ""
@@ -303,7 +305,7 @@ const Form = () => {
               <input
                 type="text"
                 className="p-2 rounded-md border-gray-300 border lg:border-2 bg-transparent mb-5"
-                placeholder="e.g + 123 456789"
+                placeholder="e.g + 091 4567891"
                 value={inputs.phoneNumber}
                 onChange={onChange}
                 name="phoneNumber"
@@ -325,7 +327,7 @@ const Form = () => {
       {/*  WINDOW 2*/}
       {stepNumber === 2 && (
         <>
-          <div className="right flex flex-col px-4 py-5 bg-white -mt-14 lg:mt-0 w-11/12 lg:w-2/3 lg:h-full lg:ml-8 lg:rounded-lg lg:p-7 xl:h-full rounded-md 2xl:mt-0 2xl:h-full">
+          <div className="right flex flex-col px-4 py-5 bg-white  -mt-14 lg:mt-0 w-11/12 lg:w-2/3 lg:h-full lg:ml-8 lg:rounded-lg lg:p-7 xl:h-full xl:w-full rounded-md 2xl:mt-0 2xl:h-full 2xl:w-full">
             <h2 className=" text-blue-900 text-xl mt-4 lg:text-4xl font-bold">
               Select your plan
             </h2>
@@ -397,7 +399,11 @@ const Form = () => {
               </p>
               <button
                 className="lg:py-3 lg:px-5 py-1 px-2 bg-blue-900 text-white lg:font-bold text-base rounded-lg hover:bg-blue-500"
-                onClick={nextStep}
+                disabled={!selectedPlan}
+                onClick={() => {
+                  if (!selectedPlan) return;
+                  nextStep();
+                }}
               >
                 Next stop
               </button>
@@ -408,7 +414,7 @@ const Form = () => {
       {/*  WINDOW 3*/}
       {stepNumber === 3 && (
         <>
-          <div className="right flex flex-col px-4 py-5 bg-white -mt-14 lg:mt-0 w-11/12 lg:w-2/3 lg:h-full lg:ml-8 lg:rounded-lg lg:p-7 xl:h-full rounded-md 2xl:mt-0 2xl:h-full">
+          <div className="right flex flex-col px-4 sm:py-5 bg-white  -mt-14 lg:mt-0 w-11/12 lg:w-2/3 lg:h-full lg:ml-8 lg:rounded-lg lg:p-7 xl:h-full xl:w-full rounded-md 2xl:mt-0 2xl:h-full 2xl:w-full">
             <h2 className=" text-blue-900 text-xl mt-4 lg:text-4xl font-bold">
               Pick add-ons
             </h2>
@@ -418,7 +424,7 @@ const Form = () => {
             <div className="options grid grid-rows-3 gap-2 lg:gap-5">
               <div
                 data-value={1}
-                className="p-3 rounded-lg border flex justify-between items-center hover:bg-slate-100 hover:cursor-pointer hover:border-violet-700"
+                className="p-1 sm:p-3 rounded-lg border flex justify-between items-center hover:bg-slate-100 hover:cursor-pointer hover:border-violet-700"
                 onClick={(e) => {
                   addOnlineServices(e);
                 }}
@@ -444,7 +450,7 @@ const Form = () => {
               </div>
               <div
                 data-value={2}
-                className="p-3 rounded-lg border flex justify-between items-center hover:bg-slate-100 hover:cursor-pointer hover:border-violet-700"
+                className="p-1 sm:p-3 rounded-lg border flex justify-between items-center hover:bg-slate-100 hover:cursor-pointer hover:border-violet-700"
                 onClick={(e) => {
                   addLargersStorage(e);
                 }}
@@ -470,7 +476,7 @@ const Form = () => {
               </div>
               <div
                 data-value={2}
-                className="p-3 rounded-lg border  flex justify-between items-center hover:bg-slate-100 hover:cursor-pointer hover:border-violet-700"
+                className="p-1 sm:p-3 rounded-lg border  flex justify-between items-center hover:bg-slate-100 hover:cursor-pointer hover:border-violet-700"
                 onClick={(e) => {
                   addCostumProfile(e);
                 }}
@@ -495,7 +501,7 @@ const Form = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex justify-between xl:mt-14 mt-5">
+              <div className="flex justify-between xl:mt-14 mt-4 pb-5">
                 <p
                   className=" lg:text-indigo-800 lg:font-bold font-semibold text-gray-500 rounded-lg hover:cursor-pointer"
                   onClick={previousStep}
@@ -504,7 +510,20 @@ const Form = () => {
                 </p>
                 <button
                   className="lg:py-3 lg:px-5 py-1 px-2 bg-blue-900 text-white lg:font-bold text-base rounded-lg hover:bg-blue-500"
-                  onClick={nextStep}
+                  disabled={
+                    largerStorage === "undefined" &&
+                    costumizableProfile === "undefined" &&
+                    onlineServices === "undefined"
+                  }
+                  onClick={() => {
+                    if (
+                      largerStorage !== false ||
+                      costumizableProfile !== false ||
+                      onlineServices !== false
+                    ) {
+                      nextStep();
+                    }
+                  }}
                 >
                   Next stop
                 </button>
@@ -516,7 +535,7 @@ const Form = () => {
       {/*  WINDOW 4*/}
       {stepNumber === 4 && (
         <>
-          <div className="right flex flex-col px-4 py-5 bg-white -mt-14 lg:mt-0 w-11/12 lg:w-2/3 lg:h-full lg:ml-8 lg:rounded-lg lg:p-7 xl:h-full rounded-md 2xl:mt-0 2xl:h-full">
+          <div className="right flex flex-col px-4 py-5 bg-white  -mt-14 lg:mt-0 w-11/12 lg:w-2/3 lg:h-full lg:ml-8 lg:rounded-lg lg:p-7 xl:h-full xl:w-full rounded-md 2xl:mt-0 2xl:h-full 2xl:w-full">
             <h2 className=" text-blue-900 text-xl mt-4 lg:text-4xl font-bold">
               Finishing up
             </h2>
@@ -588,7 +607,7 @@ const Form = () => {
       {/*  WINDOW 5*/}
       {stepNumber === 5 && (
         <>
-          <div className="right flex flex-col px-4 py-5 bg-white  -mt-14 lg:mt-0 w-11/12 lg:w-2/3 lg:h-full lg:ml-8 lg:rounded-lg lg:p-7 xl:h-full rounded-md 2xl:mt-0 2xl:h-full">
+          <div className="right flex flex-col justify-center items-center text-center px-4 py-5 bg-white  -mt-14 lg:mt-0 w-11/12 lg:w-2/3 lg:h-full lg:ml-8 lg:rounded-lg lg:p-7 xl:h-full xl:w-full rounded-md 2xl:mt-0 2xl:h-full 2xl:w-full">
             <img
               src={IconThankYou}
               alt="thankYouIcon"
